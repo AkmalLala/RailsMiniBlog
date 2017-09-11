@@ -1,0 +1,10 @@
+<%=   form_for @comment, url: article_comments_path, remote: true do |f| %>
+  <%= f.hidden_field :article_id, value: @article.id %>
+  <div class="form-group">
+      <%= f.text_field :author, id: :comment_author, placeholder: 'name', class: 'form-control' %>
+  </div>
+  <div class="form-group">
+      <%= f.text_area :body, id: :comment_body, placeholder: 'Your comments', class: 'form-control' %>
+  </div>
+      <%= f.submit("Submit", class: "btn btn-primary") %>
+<% end %>

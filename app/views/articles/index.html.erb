@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Articles</h1>
+<h5>Import Article From CSV & XLS</h5>
+<%= form_tag import_articles_path, multipart: true do %>
+  <%= file_field_tag :file, accept: '.xlsx,.xls,.csv' %>
+  <%= submit_tag "Import" %>
+<% end %>
+
+<table class="table table-stripped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Img</th>
+      <th>Body</th>
+      <th>Author</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= image_tag article.img.url(:thumb) %></td>
+        <td><%= article.body %></td>
+        <td><%= article.author %></td>
+        <td><%= link_to 'Show', article %></td>
+        <td><%= link_to 'Edit', edit_article_path(article) %></td>
+        <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<!-- <div class="btn-group" data-toggle="buttons"> -->
+  <%= link_to 'New Article', new_article_path,class: "btn btn-outline-info",role: "button" %>
+  <%= link_to "Download CSV", articles_path(format: "csv"),class: "btn btn-outline-primary",role: "button" %>
+  <%= link_to "Download Excel", articles_path(format: "xls"),class: "btn btn-outline-success",role: "button" %>
+<!-- </div> -->

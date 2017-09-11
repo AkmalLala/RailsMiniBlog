@@ -1,0 +1,16 @@
+<% if @comment.errors.present? %>
+
+  $("#form-new_comment").html(" <%= j( render 'application/form' ) %>");
+
+  $($(".field_with_errors")[0]).append("<p class = 'message'> <%= escape_javascript( @comment.errors[:content].first ) %></p>");
+
+<% else %>
+
+  $("#list-comments").html(" <%= j( render 'application/comments' ) %>");
+
+  $("#comment_body").val('');
+  $("#comment_author").val('');
+
+  $("div.field_with_errors p.message").remove();
+
+<% end %>
